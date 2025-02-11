@@ -51,6 +51,17 @@ route.get("/employee/:id", async(req, res)=>{
     }
 })
 
+// delete
+route.delete("/delete/:id", async(req, res)=>{
+    try {
+        await User.findByIdAndDelete(req.params.id)
+        res.status(201).json('Employee deleted successfully')
+    } catch (error) {
+        console.log(error)
+        res.status(401).json(error)
+    }
+})
+
 // Login
 route.post("/employee/login", async(req, res)=>{
     try {
