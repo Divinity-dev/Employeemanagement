@@ -2,6 +2,7 @@ import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import cors from 'cors';
+import UserRoute from "./Routes/UserRoute.js"
 
 dotenv.config()
 // connect to DB
@@ -19,7 +20,7 @@ app.get('/', (req, res) => {
     res.send('Backend is up and running!');
 });
 
-
+app.use("/api", UserRoute)
 app.listen(process.env.port || 3000, ()=>{
     console.log(`server is running on ${process.env.port}`)
 })
