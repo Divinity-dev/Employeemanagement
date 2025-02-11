@@ -21,6 +21,7 @@ route.post("/employees", async(req, res)=>{
         const SaveDemployee = await employee.save()
         res.status(201).json(SaveDemployee)
     } catch (error) {
+        console.log(error)
         res.status(401).json(error)
     }
 })
@@ -32,9 +33,21 @@ route.get("/employees", async(req, res)=>{
         const employees = await User.find()
         res.status(200).json(employees)
     } catch (error) {
+        console.log(error)
         res.status(400).json(error)
     }
     
+})
+
+// Get user by id
+route.get("/employee/:id", async(req, res)=>{
+    try {
+        const employee = await User.findById(req.params.id)
+        res.status(200).json(employee)
+    } catch (error) {
+        console.log(error)
+        res.status(400).json(error)
+    }
 })
 
 export default route
