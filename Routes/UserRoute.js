@@ -19,10 +19,22 @@ route.post("/employees", async(req, res)=>{
     })
     try {
         const SaveDemployee = await employee.save()
-        res.status(200).json(SaveDemployee)
+        res.status(201).json(SaveDemployee)
+    } catch (error) {
+        res.status(401).json(error)
+    }
+})
+
+// Get all users
+
+route.get("/employees", async(req, res)=>{
+    try {
+        const employees = await User.find()
+        res.status(200).json(employees)
     } catch (error) {
         res.status(400).json(error)
     }
+    
 })
 
 export default route
