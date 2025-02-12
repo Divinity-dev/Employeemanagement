@@ -40,6 +40,27 @@ route.get("/employees", async(req, res)=>{
     
 })
 
+// search employee
+
+route.get("/employee/search", async(req, res)=>{
+    try {
+      let employee;
+      if(req.body.name){
+        employee = await User.find({name:req.body.name})
+      }else if(req.body.position){
+        employee = await User.find({position:req.body.position})
+      }else if(req.body.department){
+        employee = await User.find({department:req.body.department})
+      }else{
+        employee = "wrong search parameter"
+      }
+      res.status(200).json(employee)
+    } catch (error) {
+        console.log(error)
+        res.status(400).json(error)
+    }
+})
+
 // Get user by id
 route.get("/employee/:id", async(req, res)=>{
     try {
