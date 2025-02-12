@@ -9,7 +9,7 @@ const route = express.Router()
 
 // Create user
 
-route.post("/employees", async(req, res)=>{
+route.post("/employees",Admin, async(req, res)=>{
     const employee = new User({
         name:req.body.name,
         email: req.body.email,
@@ -30,7 +30,7 @@ route.post("/employees", async(req, res)=>{
 
 // Get all employees
 
-route.get("/employees", async(req, res)=>{
+route.get("/employees", Admin, async(req, res)=>{
     try {
         const employees = await User.find().limit(20)
         res.status(200).json(employees)
@@ -43,7 +43,7 @@ route.get("/employees", async(req, res)=>{
 
 // search employee
 
-route.get("/employee/search", async(req, res)=>{
+route.get("/employee/search",Admin, async(req, res)=>{
     try {
       let employee;
       if(req.body.name){
@@ -63,7 +63,7 @@ route.get("/employee/search", async(req, res)=>{
 })
 
 // Get user by id
-route.get("/employee/:id", async(req, res)=>{
+route.get("/employee/:id",Admin, async(req, res)=>{
     try {
         const employee = await User.findById(req.params.id)
         res.status(200).json(employee)
