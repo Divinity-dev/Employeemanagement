@@ -27,11 +27,11 @@ route.post("/employees", async(req, res)=>{
     }
 })
 
-// Get all users
+// Get all employees
 
 route.get("/employees", async(req, res)=>{
     try {
-        const employees = await User.find()
+        const employees = await User.find().limit(20)
         res.status(200).json(employees)
     } catch (error) {
         console.log(error)
