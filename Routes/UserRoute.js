@@ -62,6 +62,23 @@ route.delete("/delete/:id", async(req, res)=>{
     }
 })
 
+// update
+
+route.put("/employees/:id", async(req, res)=>{
+    if(req.body.password){
+        req.body.password = CryptoJS.AES.encrypt(req.body.password, process.env.crypto_key).toString()
+       }
+    try {
+        const updatedEmployee = await User.findByIdAndUpdate(req.params.id, {
+            $set:req.body
+        }, {new:true})
+        res.status(201).json(updatedEmployee)
+    } catch (error) {
+        console.log(error)
+        res.status(401).json(error)
+    }
+})
+
 // Login
 route.post("/employee/login", async(req, res)=>{
     try {
