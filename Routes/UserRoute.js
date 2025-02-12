@@ -2,6 +2,7 @@ import express from "express"
 import User from "../model/User.js"
 import cryptojs from 'crypto-js'
 import jwt from "jsonwebtoken"
+import Admin from "../middleware.js"
 
 // declare the route variable
 const route = express.Router()
@@ -73,7 +74,7 @@ route.get("/employee/:id", async(req, res)=>{
 })
 
 // delete
-route.delete("/delete/:id", async(req, res)=>{
+route.delete("/delete/:id", Admin, async(req, res)=>{
     try {
         await User.findByIdAndDelete(req.params.id)
         res.status(201).json('Employee deleted successfully')
